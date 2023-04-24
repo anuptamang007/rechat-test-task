@@ -1,5 +1,5 @@
 {
-  "name": "cra-typescript-styled-linters-boilerplate",
+  "name": "task-manager",
   "version": "0.1.0",
   "dependencies": {
     "@commitlint/cli": "^17.6.1",
