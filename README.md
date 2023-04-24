@@ -1,4 +1,8 @@
-## React application boilerplate - CRA
+## Task Manager - basic task manager app
+
+### Specs :
+
+[SPECS.md](SPECS.md)
 
 ### Tools
 
