@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components/macro';
 
-import App from './App';
+import { App } from './components';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { AppTheme } from './styles/Theme';
@@ -15,10 +15,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={AppTheme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
+      <Suspense fallback={null}>
+        <ThemeProvider theme={AppTheme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
+      </Suspense>
     </BrowserRouter>
   </React.StrictMode>
 );
