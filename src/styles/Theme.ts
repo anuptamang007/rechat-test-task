@@ -17,14 +17,14 @@ const AppTheme: DefaultTheme = {
     primary: {
       100: '#4e1fe8',
       200: '#3e1ac9',
-      300: '#2e169a',
-      400: '#1e126b',
+      300: '#A2CEED',
+      400: '#1775B9',
     },
     secondary: {
       100: '#b7b2b2',
       200: '#a6a1a1',
       300: '#959090',
-      400: '#848080',
+      400: '#E9EAEB',
     },
   },
   mediaQuery: {
