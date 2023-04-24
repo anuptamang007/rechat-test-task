@@ -1,0 +1,234 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:react/jsx-runtime"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "settings": {
+    "import/extensions": [".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "tsconfig.json"
+      }
+    }
+  },
+  "rules": {
+    "no-undef": "off",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "react/prop-types": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn",
+    "react/jsx-curly-newline": "warn",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": "warn",
+    "react/jsx-indent": "warn",
+    "react/jsx-indent-props": "warn",
+    "react/jsx-closing-bracket-location": "warn",
+    "react/jsx-curly-brace-presence": "warn",
+    "react/jsx-fragments": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react/jsx-boolean-value": "warn",
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "import/no-mutable-exports": "off",
+    "no-underscore-dangle": "off",
+    "no-multi-assign": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".tsx"]
+      }
+    ],
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "no-else-return": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "warn",
+      {
+        "functions": true,
+        "classes": true,
+        "variables": true,
+        "enums": true,
+        "typedefs": true
+      }
+    ],
+    "@typescript-eslint/no-shadow": [
+      "warn",
+      {
+        "hoist": "all"
+      }
+    ],
+    "react/function-component-definition": [
+      "off",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "off",
+      {
+        "devDependencies": [
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/*.stories.tsx",
+          "**/*.stories.ts",
+          "**/*.stories.jsx",
+          "**/*.stories.js",
+          "**/*.stories.mdx",
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.test.jsx",
+          "**/*.test.js",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/*.spec.jsx",
+          "**/*.spec.js",
+          "**/*.d.ts",
+          "**/*.config.js",
+          "**/*.config.ts",
+          "**/*.config.tsx",
+          "**/*.config.jsx",
+          "**/next.config.js",
+          "**/next.config.ts",
+          "**/next.config.tsx",
+          "**/next.config.jsx",
+          "**/webpack.config.js",
+          "**/webpack.config.ts",
+          "**/webpack.config.tsx",
+          "**/webpack.config.jsx",
+          "**/webpack.config.babel.js",
+          "**/webpack.config.babel.ts",
+          "**/webpack.config.babel.tsx",
+          "**/webpack.config.babel.jsx",
+          "**/rollup.config.js",
+          "**/rollup.config.ts",
+          "**/rollup.config.tsx",
+          "**/rollup.config.jsx",
+          "**/rollup.config.babel.js",
+          "**/rollup.config.babel.ts",
+          "**/rollup.config.babel.tsx",
+          "**/rollup.config.babel.jsx",
+          "**/gulpfile.js",
+          "**/gulpfile.ts",
+          "**/gulpfile.tsx",
+          "**/gulpfile.jsx",
+          "**/gulpfile.babel.js",
+          "**/gulpfile.babel.ts",
+          "**/gulpfile.babel.tsx",
+          "**/gulpfile.babel.jsx",
+          "**/babel.config.js",
+          "**/babel.config.ts",
+          "**/babel.config.tsx",
+          "**/babel.config.jsx",
+          "**/babel.config.cjs",
+          "**/babel.config.cjs.ts",
+          "**/babel.config.cjs.tsx",
+          "**/babel.config.cjs.jsx",
+          "**/babel.config.mjs",
+          "**/babel.config.mjs.ts",
+          "**/babel.config.mjs.tsx",
+          "**/babel.config.mjs.jsx",
+          "**/jest.config.js",
+          "**/jest.config"
+        ]
+      }
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "imports/no-unresolved": "off",
+    "import/no-cycle": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never",
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],    
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [{
+          "name": "styled-components",
+          "message": "Please import from styled-components/macro."
+        }],
+        "patterns": [
+          "!styled-components/macro"
+        ]
+      }
+    ]
+    
+  }
+}

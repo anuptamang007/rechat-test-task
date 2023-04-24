@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    ["macros"],
+    [
+      "babel-plugin-styled-components",
+      {
+        "namespace": "my-app",
+        "displayName": true,
+        "fileName": false,
+        "minify": false,
+        "transpileTemplateLiterals": false,
+        "pure": true,
+        "ssr": false
+      }
+    ]
+  ]
+}

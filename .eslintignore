@@ -1,0 +1,8 @@
+.eslintrc.js
+.eslintrc.json
+ios/
+android/
+*.config.js
+build/*
+public/*
+!build/index.js
