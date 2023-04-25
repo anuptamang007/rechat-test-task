@@ -103,7 +103,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       resetEditPost(dispatch);
       setIsSubmitted(false);
     }
-  }, [editedData, dispatch, params?.id]);
+  }, [editedData, dispatch, params?.id, taskList, setTaskList]);
 
   useEffect(() => {
     if (singleData) {
