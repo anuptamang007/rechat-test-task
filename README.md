@@ -1,5 +1,7 @@
 ## Task Manager - basic task manager app
 
+### Preview : https://rechat-test-task.netlify.app/
+
 ### Specs :
 
 [SPECS.md](SPECS.md)
