@@ -22,6 +22,6 @@ export const FormInput = styled.input<StyleProps>`
     border-bottom-color: ${({ theme }) => theme.colors.primary[400]};
   }
 
-  ${({ as }) => as === 'textarea' && 'height: 350px; resize: none'}
+  ${({ as }) => as === 'textarea' && 'height: 150px; resize: none'}
   ${({ as }) => as === 'select' && 'text-transform: capitalize;'}
 `;

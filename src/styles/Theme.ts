@@ -15,7 +15,7 @@ const AppTheme: DefaultTheme = {
       400: '#333333',
     },
     primary: {
-      100: '#4e1fe8',
+      100: '#A2CEED',
       200: '#3e1ac9',
       300: '#0e619c',
       400: '#1775B9',
