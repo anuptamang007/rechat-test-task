@@ -27,6 +27,12 @@ declare module 'styled-components/macro' {
         300: string;
         400: string;
       };
+      danger: {
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+      };
     };
 
     mediaQuery: {

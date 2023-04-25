@@ -1,7 +1,5 @@
 import styled from 'styled-components/macro';
 
-import { AppTheme } from 'src/styles/Theme';
-
 import { StyleProps } from './styled';
 
 type TProps = {
@@ -11,9 +9,12 @@ type TProps = {
 export const Button = styled.button<TProps | StyleProps>`
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   justify-content: center;
-  border: none;
-  padding: 10px;
+  border: 1px solid
+    ${(props) =>
+      props.primary ? 'transparent' : props.theme.colors.secondary[300]};
+  padding: 20px 10px;
   cursor: pointer;
   margin: 0;
   font-size: 1rem;
@@ -21,16 +22,16 @@ export const Button = styled.button<TProps | StyleProps>`
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
   background: ${(props) =>
-    props.primary
-      ? AppTheme.colors.primary[400]
-      : AppTheme.colors.secondary[400]};
+    props.primary ? props.theme.colors.primary[400] : 'none'};
   color: ${(props) =>
-    props.primary ? AppTheme.colors.light[400] : AppTheme.colors.dark[400]};
+    props.primary
+      ? props.theme.colors.light[100]
+      : props.theme.colors.dark[400]};
 
   &:hover {
     background: ${(props) =>
       props.primary
-        ? AppTheme.colors.primary[100]
-        : AppTheme.colors.secondary[100]};
+        ? props.theme.colors.primary[300]
+        : props.theme.colors.secondary[100]};
   }
 `;

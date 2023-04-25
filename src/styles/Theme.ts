@@ -17,7 +17,7 @@ const AppTheme: DefaultTheme = {
     primary: {
       100: '#4e1fe8',
       200: '#3e1ac9',
-      300: '#A2CEED',
+      300: '#0e619c',
       400: '#1775B9',
     },
     secondary: {
@@ -25,6 +25,12 @@ const AppTheme: DefaultTheme = {
       200: '#a6a1a1',
       300: '#959090',
       400: '#E9EAEB',
+    },
+    danger: {
+      100: '#f67676',
+      200: '#f67676',
+      300: '#f67676',
+      400: '#f67676',
     },
   },
   mediaQuery: {
