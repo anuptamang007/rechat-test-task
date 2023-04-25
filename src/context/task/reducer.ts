@@ -82,6 +82,21 @@ export default function taskReducer(state: TaskListProps, action: TaskActions) {
         error: action.payload.error,
       };
     }
+    case Types.ResetCreatePost: {
+      return {
+        ...state,
+        loading: false,
+        createdData: null,
+      };
+    }
+
+    case Types.ResetEditPost: {
+      return {
+        ...state,
+        loading: false,
+        editedData: null,
+      };
+    }
     default: {
       return state;
     }

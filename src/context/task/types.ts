@@ -51,6 +51,8 @@ export enum Types {
   CreateTask = 'CREATE_TASK',
   CreateTaskSuccess = 'CREATE_TASK_SUCCESS',
   CreateTaskFailed = 'CREATE_TASK_FAILED',
+  ResetCreatePost = 'RESET_CREATE_POST',
+  ResetEditPost = 'RESET_EDIT_POST',
 }
 
 export type TasksPayload = {
@@ -91,6 +93,12 @@ export type TasksPayload = {
   };
   [Types.EditTaskByIdFailed]: {
     error: object | null | string;
+  };
+  [Types.ResetCreatePost]: {
+    createdData: null;
+  };
+  [Types.ResetEditPost]: {
+    editedData: null;
   };
 };
 

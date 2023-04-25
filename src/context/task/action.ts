@@ -86,3 +86,11 @@ export const editTask = async (
     });
   }
 };
+
+export const resetCreatePost = (dispatch: (arg: IDispatch) => void) => {
+  dispatch({ type: Types.ResetCreatePost });
+};
+
+export const resetEditPost = (dispatch: (arg: IDispatch) => void) => {
+  dispatch({ type: Types.ResetEditPost });
+};
