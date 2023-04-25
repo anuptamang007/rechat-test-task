@@ -29,6 +29,12 @@ export const FieldText = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
+  setTimeout(() => {
+    if (inputRef?.current?.value) {
+      setIsFocused(true);
+    }
+  }, 500);
+
   useEffect(() => {
     const input = inputRef.current;
 
