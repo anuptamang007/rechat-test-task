@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components/macro';
 
 import { App } from './components';
+import { TaskProvider } from './context/task';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { AppTheme } from './styles/Theme';
@@ -17,8 +18,10 @@ root.render(
     <BrowserRouter>
       <Suspense fallback={null}>
         <ThemeProvider theme={AppTheme}>
-          <GlobalStyle />
-          <App />
+          <TaskProvider>
+            <GlobalStyle />
+            <App />
+          </TaskProvider>
         </ThemeProvider>
       </Suspense>
     </BrowserRouter>
