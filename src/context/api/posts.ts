@@ -14,12 +14,22 @@ export const getTaskByIdApi = async (id: string) => {
 
 export const createTaskApi = async (task: Task) => {
   const tasks = localStorage.getItem('tasks') || '[]';
-  const newTask = {
-    id: Math.random().toString(36).substr(2, 9),
+  const data = {
     title: task.title,
     description: task.description,
     status: task.status,
-    history: task.history || [],
+  };
+  const newTask = {
+    id: Math.random().toString(36).substr(2, 9),
+    createdAt: new Date().getTime(),
+    ...data,
+    history: [
+      {
+        id: Math.random().toString(36).substr(2, 9),
+        task: data,
+        updatedAt: new Date().getTime(),
+      },
+    ],
   };
   const newTasks = [...JSON.parse(tasks), newTask];
   localStorage.setItem('tasks', JSON.stringify(newTasks));

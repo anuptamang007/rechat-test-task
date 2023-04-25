@@ -25,6 +25,7 @@ export interface Task {
   title: string;
   description: string;
   status: string;
+  createdAt?: string | number;
   history?: TaskHistory[] | [];
 }
 
