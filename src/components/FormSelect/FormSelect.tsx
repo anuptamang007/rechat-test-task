@@ -21,9 +21,7 @@ const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
     'Deployed',
   ]);
   const [selectedOption, setSelectedOption] = useState(
-    selectOptions.find(
-      (option: string) => option.toUpperCase() === currentValue.toUpperCase()
-    ) || 'ToDo'
+    selectOptions.find((option) => option === currentValue) || 'ToDo'
   );
 
   const handleSelectOption = (option: string) => {

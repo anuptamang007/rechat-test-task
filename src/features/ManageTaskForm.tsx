@@ -47,10 +47,12 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       const newData = {
         title: values.title,
         description: values.description,
-        status,
+        status: 'ToDo',
       };
       if (action === 'edit') {
-        editTask(dispatch, { ...newData, id: params?.id });
+        if (params?.id) {
+          editTask(dispatch, { ...newData, id: params.id, status });
+        }
       } else {
         createTask(dispatch, newData);
       }
@@ -66,7 +68,9 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
   };
 
   useEffect(() => {
-    readTaskById(dispatch, params?.id);
+    if (params?.id) {
+      readTaskById(dispatch, params.id);
+    }
   }, [dispatch, params?.id]);
 
   useEffect(() => {
@@ -74,7 +78,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       const newTask = {
         title: createdData.title,
         description: createdData.description,
-        status: createdData.status,
+        status,
       };
 
       setTaskList([...taskList, newTask]);
@@ -82,7 +86,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       handleFormReset();
       resetCreatePost(dispatch);
     }
-  }, [createdData, dispatch, setTaskList, taskList]);
+  }, [createdData, dispatch, setTaskList, status, taskList]);
 
   useEffect(() => {
     if (editedData) {
@@ -122,7 +126,8 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       });
       setStatus('ToDo');
     }
-  }, [singleData]);
+  }, [singleData, params?.id]);
+
   return (
     <>
       <Box as="form" onSubmit={handleFormSubmit} onReset={handleFormReset}>
