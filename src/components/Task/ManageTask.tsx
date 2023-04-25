@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { css, useTheme } from 'styled-components/macro';
 
+import { TaskContext } from 'src/context/task';
+import { readAllTask } from 'src/context/task/action';
 import { ManageTaskForm } from 'src/features';
 
-import { Box } from '../UI';
+import { ScrollToTop } from '../ScrollToTop';
+import { Box, Container } from '../UI';
+
+import { ListTask } from './ListTask';
 
 export const ManageTask = () => {
+  const { state, dispatch } = useContext(TaskContext);
+  const { data } = state;
+
   const { hash } = useLocation();
   const action = hash?.slice(1);
   const [blockHeading, setBlockHeading] = useState('');
+  const [taskList, setTaskList] = useState<any>([]);
 
   const theme = useTheme();
 
@@ -25,25 +34,46 @@ export const ManageTask = () => {
       setBlockHeading('');
     }
   }, [action]);
+
+  useEffect(() => {
+    readAllTask(dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      setTaskList(data);
+    }
+  }, [data, setTaskList]);
   return (
-    <Box
-      css={css`
-        padding: 30px 0;
-      `}
-    >
-      <Box
-        as="h2"
-        css={css`
-          text-transform: capitalize;
-          margin: 0 0 25px;
-          color: ${theme.colors.dark[400]};
-          font-size: 1.5rem;
-          line-height: 1.3;
-        `}
-      >
-        {blockHeading}
+    <>
+      {hash && <ScrollToTop />}
+      <Box>
+        <Container
+          css={css`
+            padding-top: 30px;
+            padding-bottom: 30px;
+          `}
+        >
+          <Box
+            as="h2"
+            css={css`
+              text-transform: capitalize;
+              margin: 0 0 25px;
+              color: ${theme.colors.dark[400]};
+              font-size: 1.5rem;
+              line-height: 1.3;
+            `}
+          >
+            {blockHeading}
+          </Box>
+          <ManageTaskForm
+            taskList={taskList}
+            setTaskList={setTaskList}
+            action={action}
+          />
+        </Container>
+        <ListTask taskList={taskList} />
       </Box>
-      <ManageTaskForm action={action} />
-    </Box>
+    </>
   );
 };

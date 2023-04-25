@@ -1,13 +1,7 @@
-import { Container } from 'src/components';
-import { ListTask, ManageTask } from 'src/components/Task';
+import { ManageTask } from 'src/components/Task';
 
 const Home = () => {
-  return (
-    <Container>
-      <ManageTask />
-      <ListTask />
-    </Container>
-  );
+  return <ManageTask />;
 };
 
 export default Home;
