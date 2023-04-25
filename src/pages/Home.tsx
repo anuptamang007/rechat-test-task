@@ -1,9 +1,13 @@
-import React from 'react';
-
-import { Box } from 'src/components';
+import { Container } from 'src/components';
+import { ListTask, ManageTask } from 'src/components/Task';
 
 const Home = () => {
-  return <Box>Home</Box>;
+  return (
+    <Container>
+      <ManageTask />
+      <ListTask />
+    </Container>
+  );
 };
 
 export default Home;
