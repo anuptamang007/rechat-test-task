@@ -103,7 +103,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       resetEditPost(dispatch);
       setIsSubmitted(false);
     }
-  }, [editedData, dispatch, params?.id, setTaskList, taskList]);
+  }, [editedData, dispatch, params?.id]);
 
   useEffect(() => {
     if (singleData) {
@@ -113,15 +113,16 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
         status: singleData.status,
       };
 
+      setStatus(task.status);
       setValues(task);
     } else {
       setValues({
         title: '',
         description: '',
       });
+      setStatus('ToDo');
     }
   }, [singleData]);
-
   return (
     <>
       <Box as="form" onSubmit={handleFormSubmit} onReset={handleFormReset}>

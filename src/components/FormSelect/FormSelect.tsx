@@ -21,7 +21,9 @@ const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
     'Deployed',
   ]);
   const [selectedOption, setSelectedOption] = useState(
-    selectOptions.find((option) => option === currentValue) || 'ToDo'
+    selectOptions.find(
+      (option: string) => option.toUpperCase() === currentValue.toUpperCase()
+    ) || 'ToDo'
   );
 
   const handleSelectOption = (option: string) => {
@@ -101,7 +103,7 @@ const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <Box as="span" className="form-select__label">
-          {selectedOption}
+          {currentValue}
         </Box>
         <Box
           css={css`
