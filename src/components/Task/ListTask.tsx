@@ -48,6 +48,7 @@ export const ListTask = ({ taskList }: TProps) => {
               {taskList?.length > 0 &&
                 taskList.map((task: Task) => (
                   <Col
+                    style={{ display: 'flex' }}
                     sm={6}
                     md={4}
                     lg={3}

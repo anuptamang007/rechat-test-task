@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link } from 'react-router-dom';
 import { css } from 'styled-components/macro';
 
@@ -18,12 +16,28 @@ export const TaskItem = ({ task }: TProps) => {
       css={css`
         background: ${({ theme }) => theme.colors.light[100]};
         padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
         border-radius: 10px;
         box-shadow: 2px 2px 3px 3px rgb(0 0 0 / 20%);
       `}
     >
       <Box as="h3">{task.title}</Box>
-      <Box as="p">{task.description}</Box>
+      <Box
+        css={css`
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          flex-grow: 1;
+          margin-bottom: 50px;
+        `}
+        as="p"
+      >
+        {task.description}
+      </Box>
       <Box
         css={css`
           list-style: none;
@@ -62,8 +76,9 @@ export const TaskItem = ({ task }: TProps) => {
                 opacity: 0.7;
               }
             `}
-            to={`/#edit?id=${task.id}`}
+            to="/#edit"
             as={Link}
+            state={{ id: task.id }}
           >
             <IconEdit color="primary" width="30px" height="30px" />
           </Box>

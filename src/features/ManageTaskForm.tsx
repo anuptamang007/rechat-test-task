@@ -1,10 +1,16 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { css } from 'styled-components/macro';
 
 import { TaskContext } from 'src/context/task';
-import { createTask, resetCreatePost } from 'src/context/task/action';
+import {
+  createTask,
+  editTask,
+  readTaskById,
+  resetCreatePost,
+  resetEditPost,
+} from 'src/context/task/action';
 import { Task } from 'src/context/task/types';
 
 import { FieldText, IconEdit, IconPlus } from '../components';
@@ -18,13 +24,14 @@ type TProps = {
 
 export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
   const { state, dispatch } = useContext(TaskContext);
-  const { loading, createdData, editedData, singleData, error, data } = state;
+  const { loading, createdData, editedData, singleData } = state;
+  const { state: params } = useLocation();
+  const [status, setStatus] = useState('ToDo');
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [values, setValues] = useState({
     title: '',
     description: '',
-    status: 'ToDo',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,20 +47,27 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       const newData = {
         title: values.title,
         description: values.description,
-        status: values.status,
+        status,
       };
-
-      createTask(dispatch, newData);
+      if (action === 'edit') {
+        editTask(dispatch, { ...newData, id: params?.id });
+      } else {
+        createTask(dispatch, newData);
+      }
     }
   };
 
   const handleFormReset = () => {
+    setIsSubmitted(false);
     setValues({
       title: '',
       description: '',
-      status: 'ToDo',
     });
   };
+
+  useEffect(() => {
+    readTaskById(dispatch, params?.id);
+  }, [dispatch, params?.id]);
 
   useEffect(() => {
     if (createdData) {
@@ -69,6 +83,44 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       resetCreatePost(dispatch);
     }
   }, [createdData, dispatch, setTaskList, taskList]);
+
+  useEffect(() => {
+    if (editedData) {
+      const newTask = {
+        title: editedData.title,
+        description: editedData.description,
+        status: editedData.status,
+      };
+
+      const newTaskList = taskList.map((task: Task) => {
+        if (task.id === params?.id) {
+          return newTask;
+        }
+        return task;
+      });
+
+      setTaskList(newTaskList);
+      resetEditPost(dispatch);
+      setIsSubmitted(false);
+    }
+  }, [editedData, dispatch, params?.id, setTaskList, taskList]);
+
+  useEffect(() => {
+    if (singleData) {
+      const task = {
+        title: singleData.title,
+        description: singleData.description,
+        status: singleData.status,
+      };
+
+      setValues(task);
+    } else {
+      setValues({
+        title: '',
+        description: '',
+      });
+    }
+  }, [singleData]);
 
   return (
     <>
@@ -91,10 +143,9 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
         {action.toLocaleUpperCase() === 'EDIT' && (
           <>
             <FieldText
+              value={status}
               as="select"
-              onChange={handleInputChange}
-              value={values.status}
-              name="status"
+              setStatus={setStatus}
               title="status"
             />
             <Box

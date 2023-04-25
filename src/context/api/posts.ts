@@ -41,7 +41,25 @@ export const editTaskByIdApi = async (task: Task) => {
 
   const newTasks = JSON.parse(tasks).map((item: Task) => {
     if (item.id === task.id) {
-      return task;
+      const history = [
+        { ...item.history },
+        {
+          id: Math.random().toString(36).substr(2, 9),
+          task: {
+            title: task.title,
+            description: task.description,
+            status: task.status,
+          },
+          updatedAt: new Date().getTime(),
+        },
+      ];
+      return {
+        ...item,
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        history,
+      };
     }
     return item;
   });

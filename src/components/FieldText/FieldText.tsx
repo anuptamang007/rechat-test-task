@@ -8,11 +8,12 @@ import { Box, FormInput } from '../UI';
 type TProps = {
   type?: string;
   title: string;
-  value: string;
-  name: string;
+  value?: string;
+  name?: string;
   as?: string;
+  setStatus?: (status: any) => void;
   hasError?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const FieldText = ({
@@ -22,6 +23,7 @@ export const FieldText = ({
   value,
   as,
   hasError,
+  setStatus,
   onChange,
 }: TProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,7 +68,7 @@ export const FieldText = ({
           onChange={onChange}
         />
       ) : as === 'select' ? (
-        <FormSelect currentValue={value} />
+        <FormSelect setStatus={setStatus} currentValue={value} />
       ) : (
         <FormInput
           title={title}

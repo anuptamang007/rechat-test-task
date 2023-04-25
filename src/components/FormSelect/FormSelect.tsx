@@ -5,10 +5,11 @@ import { css } from 'styled-components/macro';
 import { Box } from '../UI';
 
 interface FormSelectProps {
-  currentValue: string;
+  currentValue: any;
+  setStatus?: any;
 }
 
-const FormSelect = ({ currentValue }: FormSelectProps) => {
+const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectOptions, setSelectOptions] = useState([
@@ -25,6 +26,7 @@ const FormSelect = ({ currentValue }: FormSelectProps) => {
 
   const handleSelectOption = (option: string) => {
     setSelectedOption(option);
+    setStatus(option);
     setIsOpen(false);
   };
 
