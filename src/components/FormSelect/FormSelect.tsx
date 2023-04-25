@@ -103,7 +103,7 @@ const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <Box as="span" className="form-select__label">
-          {currentValue}
+          {selectedOption}
         </Box>
         <Box
           css={css`
