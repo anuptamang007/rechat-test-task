@@ -13,6 +13,15 @@ type TProps = {
 };
 
 export const ListTask = ({ taskList }: TProps) => {
+  const sorted = [...taskList].sort((a: Task, b: Task) => {
+    if (a.lastUpdated && b.lastUpdated) {
+      return (
+        new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
+      );
+    }
+    return 0;
+  });
+
   return (
     <>
       <Box
@@ -45,8 +54,8 @@ export const ListTask = ({ taskList }: TProps) => {
         >
           <Container>
             <Row>
-              {taskList?.length > 0 &&
-                taskList.map((task: Task) => (
+              {sorted?.length > 0 &&
+                sorted.map((task: Task) => (
                   <Col
                     style={{ display: 'flex' }}
                     sm={6}
@@ -58,7 +67,7 @@ export const ListTask = ({ taskList }: TProps) => {
                   </Col>
                 ))}
             </Row>
-            {taskList?.length === 0 && (
+            {sorted?.length === 0 && (
               <Box
                 css={css`
                   min-height: 300px;

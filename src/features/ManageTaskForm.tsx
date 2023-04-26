@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { css } from 'styled-components/macro';
 
 import { TaskContext } from 'src/context/task';
@@ -27,6 +27,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
   const { loading, createdData, editedData, singleData } = state;
   const { state: params } = useLocation();
   const [status, setStatus] = useState('ToDo');
+  const navigate = useNavigate();
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [values, setValues] = useState({
@@ -49,10 +50,12 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
         description: values.description,
         status: 'ToDo',
       };
-      if (action === 'edit') {
-        if (params?.id) {
-          editTask(dispatch, { ...newData, id: params.id, status });
-        }
+      if (action === 'edit' && params?.id) {
+        editTask(dispatch, {
+          ...singleData,
+          ...newData,
+          status,
+        });
       } else {
         createTask(dispatch, newData);
       }
@@ -70,54 +73,35 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
   useEffect(() => {
     if (params?.id) {
       readTaskById(dispatch, params.id);
+    } else {
+      navigate('/');
     }
-  }, [dispatch, params?.id]);
+  }, [dispatch, navigate, params?.id]);
 
   useEffect(() => {
     if (createdData) {
-      const newTask = {
-        title: createdData.title,
-        description: createdData.description,
-        status,
-      };
-
-      setTaskList([...taskList, newTask]);
+      setTaskList([...taskList, createdData]);
 
       handleFormReset();
       resetCreatePost(dispatch);
     }
-  }, [createdData, dispatch, setTaskList, status, taskList]);
+  }, [createdData, dispatch, setTaskList, taskList]);
 
   useEffect(() => {
     if (editedData) {
-      const newTask = {
-        title: editedData.title,
-        description: editedData.description,
-        status: editedData.status,
-      };
-
-      const newTaskList = taskList.map((task: Task) => {
-        if (task.id === params?.id) {
-          return newTask;
-        }
-        return task;
-      });
-
-      setTaskList(newTaskList);
       resetEditPost(dispatch);
-      setIsSubmitted(false);
+      navigate('/');
     }
-  }, [editedData, dispatch, params?.id, taskList, setTaskList]);
+  }, [dispatch, editedData, navigate]);
 
   useEffect(() => {
     if (singleData) {
       const task = {
         title: singleData.title,
         description: singleData.description,
-        status: singleData.status,
       };
 
-      setStatus(task.status);
+      setStatus(singleData.status);
       setValues(task);
     } else {
       setValues({
@@ -127,6 +111,13 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
       setStatus('ToDo');
     }
   }, [singleData, params?.id]);
+
+  useEffect(() => {
+    if (!params?.id) {
+      navigate('/');
+      handleFormReset();
+    }
+  }, [params?.id, action, navigate]);
 
   return (
     <>

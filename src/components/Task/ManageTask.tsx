@@ -5,6 +5,7 @@ import { css, useTheme } from 'styled-components/macro';
 
 import { TaskContext } from 'src/context/task';
 import { readAllTask } from 'src/context/task/action';
+import { Task } from 'src/context/task/types';
 import { ManageTaskForm } from 'src/features';
 
 import { ScrollToTop } from '../ScrollToTop';
@@ -14,12 +15,11 @@ import { ListTask } from './ListTask';
 
 export const ManageTask = () => {
   const { state, dispatch } = useContext(TaskContext);
-  const { data } = state;
 
   const { hash } = useLocation();
   const action = hash?.slice(1);
   const [blockHeading, setBlockHeading] = useState('');
-  const [taskList, setTaskList] = useState<any>([]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   const theme = useTheme();
 
@@ -40,10 +40,10 @@ export const ManageTask = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (data.length > 0) {
-      setTaskList(data);
+    if (state?.data?.length > 0) {
+      setTaskList(state.data);
     }
-  }, [data, setTaskList]);
+  }, [state.data]);
   return (
     <>
       {hash && <ScrollToTop />}
@@ -72,7 +72,7 @@ export const ManageTask = () => {
             action={action}
           />
         </Container>
-        <ListTask taskList={taskList} />
+        {action === '' && <ListTask taskList={taskList} />}
       </Box>
     </>
   );
