@@ -11,7 +11,7 @@ type TProps = {
   value?: string;
   name?: string;
   as?: string;
-  setStatus?: (status: any) => void;
+  setStatus?: (status: string) => void;
   hasError?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -33,7 +33,7 @@ export const FieldText = ({
     if (inputRef?.current?.value) {
       setIsFocused(true);
     }
-  }, 500);
+  }, 100);
 
   useEffect(() => {
     const input = inputRef.current;

@@ -5,11 +5,11 @@ import { css } from 'styled-components/macro';
 import { Box } from '../UI';
 
 interface FormSelectProps {
-  currentValue: any;
-  setStatus?: any;
+  currentValue: string | undefined;
+  setStatus?: (status: string) => void;
 }
 
-const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
+const FormSelect = ({ currentValue = 'ToDo', setStatus }: FormSelectProps) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectOptions, setSelectOptions] = useState([
@@ -26,7 +26,8 @@ const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
 
   const handleSelectOption = (option: string) => {
     setSelectedOption(option);
-    setStatus(option);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    typeof setStatus === 'function' && setStatus(option);
     setIsOpen(false);
   };
 
@@ -96,7 +97,7 @@ const FormSelect = ({ currentValue, setStatus }: FormSelectProps) => {
           text-align: left;
           color: ${({ theme }) => theme.colors.dark[400]};
         `}
-        as="button"
+        as="a"
         className="form-select__opener"
         onClick={() => setIsOpen(!isOpen)}
       >
