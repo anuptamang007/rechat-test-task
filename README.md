@@ -38,8 +38,8 @@
 - `npm run build` - build production version
 - `npm run lint` - lint code
 - `npm run lint:fix` - lint code and fix errors
-- `npm run stylelint` - lint styles
-- `npm run stylelint:fix` - lint styles and fix errors
+- `npm run lint:css` - lint styles
+- `npm run lint:cssfix` - lint styles and fix errors
 - `npm run format` - format code
 
 ### Conventional Commits with [Commitizen](https://github.com/commitizen/cz-cli/) and [Commitlint](https://commitlint.js.org/#/)
