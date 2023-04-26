@@ -40,4 +40,8 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     height: auto;
   }
+
+  strong {
+    font-weight: 700;
+  }
 `;
