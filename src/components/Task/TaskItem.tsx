@@ -24,19 +24,34 @@ export const TaskItem = ({ task }: TProps) => {
         box-shadow: 2px 2px 3px 3px rgb(0 0 0 / 20%);
       `}
     >
-      <Box as="h3">{task.title}</Box>
       <Box
         css={css`
           display: -webkit-box;
           -webkit-box-orient: vertical;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 2;
           overflow: hidden;
-          flex-grow: 1;
-          margin-bottom: 50px;
         `}
-        as="p"
+        as="h3"
       >
-        {task.description}
+        {task.title}
+      </Box>
+      <Box
+        css={css`
+          flex-grow: 1;
+        `}
+      >
+        <Box
+          css={css`
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            margin-bottom: 50px;
+          `}
+          as="p"
+        >
+          {task.description}
+        </Box>
       </Box>
       <Box
         css={css`
