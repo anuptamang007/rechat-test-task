@@ -138,7 +138,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
           title="description"
           hasError={isSubmitted && !values.description}
         />
-        {action.toLocaleUpperCase() === 'EDIT' && (
+        {action.toLocaleUpperCase() === 'EDIT' && singleData && (
           <>
             <FieldText
               value={status}
@@ -215,7 +215,7 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
                         background: ${({ theme }) =>
                           theme.colors.secondary[100]};
                       `}
-                      key={item.task.id}
+                      key={Math.random().toString(36).substr(2, 9)}
                     >
                       <Box
                         css={css`
