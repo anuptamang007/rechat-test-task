@@ -11,10 +11,11 @@ import {
   resetCreatePost,
   resetEditPost,
 } from 'src/context/task/action';
-import { Task } from 'src/context/task/types';
+import { Task, TaskHistory } from 'src/context/task/types';
+import { toDateTime } from 'src/utilities/getDateTime';
 
 import { FieldText, IconEdit, IconPlus } from '../components';
-import { Box, Button } from '../components/UI';
+import { Box, Button, Col, Row } from '../components/UI';
 
 type TProps = {
   action: string;
@@ -193,6 +194,126 @@ export const ManageTaskForm = ({ action, taskList, setTaskList }: TProps) => {
                 </Button>
               </Box>
             </Box>
+            {singleData?.history?.length > 1 && (
+              <Box
+                css={css`
+                  padding: 30px 0;
+                `}
+              >
+                <h3>Task History</h3>
+
+                <Box
+                  css={css`
+                    margin: 0;
+                  `}
+                >
+                  {singleData?.history.slice(-2).map((item: TaskHistory) => (
+                    <Box
+                      css={css`
+                        position: relative;
+                        padding: 20px 20px 10px;
+                        background: ${({ theme }) =>
+                          theme.colors.secondary[100]};
+                      `}
+                      key={item.task.id}
+                    >
+                      <Box
+                        css={css`
+                          margin-bottom: 5px;
+                        `}
+                      >
+                        <Box
+                          css={css`
+                            font-size: 16px;
+                          `}
+                        >
+                          <strong>Edited</strong> on{' '}
+                          <Box
+                            as="span"
+                            css={css`
+                              font-style: italic;
+                              font-weight: 700;
+                            `}
+                          >
+                            {item?.task?.createdAt &&
+                              toDateTime(item.task.createdAt)}
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box
+                        css={css`
+                          font-size: 14px;
+                          line-height: 1.5;
+                        `}
+                      >
+                        <Row
+                          css={css`
+                            padding: 5px 0;
+                            border-top: 1px solid
+                              ${({ theme }) => theme.colors.dark[100]};
+                          `}
+                        >
+                          <Col xs="2">
+                            <Box
+                              css={css`
+                                padding: 0 10px 0 0;
+                                border-right: 1px solid
+                                  ${({ theme }) => theme.colors.dark[100]};
+                              `}
+                            >
+                              Title
+                            </Box>
+                          </Col>
+                          <Col xs="10">{item.task.title}</Col>
+                        </Row>
+                        <Row
+                          css={css`
+                            padding: 5px 0;
+                            border-top: 1px solid
+                              ${({ theme }) => theme.colors.dark[100]};
+                          `}
+                        >
+                          <Col xs="2">
+                            <Box
+                              css={css`
+                                padding: 0 10px 0 0;
+                                border-right: 1px solid
+                                  ${({ theme }) => theme.colors.dark[100]};
+                              `}
+                            >
+                              Description
+                            </Box>
+                          </Col>
+                          <Col xs="10">{item.task.description}</Col>
+                        </Row>
+                        <Row
+                          css={css`
+                            padding: 5px 0;
+                            border-top: 1px solid
+                              ${({ theme }) => theme.colors.dark[100]};
+                            border-bottom: 1px solid
+                              ${({ theme }) => theme.colors.dark[100]};
+                          `}
+                        >
+                          <Col xs="2">
+                            <Box
+                              css={css`
+                                padding: 0 10px 0 0;
+                                border-right: 1px solid
+                                  ${({ theme }) => theme.colors.dark[100]};
+                              `}
+                            >
+                              Status
+                            </Box>
+                          </Col>
+                          <Col xs="10">{item.task.status}</Col>
+                        </Row>
+                      </Box>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            )}
           </>
         )}
         {action === '' && (
