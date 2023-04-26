@@ -21,7 +21,7 @@ const FormSelect = ({ currentValue = 'ToDo', setStatus }: FormSelectProps) => {
     'Deployed',
   ]);
   const [selectedOption, setSelectedOption] = useState(
-    selectOptions.find((option) => option === currentValue) || 'ToDo'
+    selectOptions.find((option) => option === currentValue) || selectOptions[0]
   );
 
   const handleSelectOption = (option: string) => {
@@ -69,6 +69,10 @@ const FormSelect = ({ currentValue = 'ToDo', setStatus }: FormSelectProps) => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [selectRef]);
+
+  useEffect(() => {
+    setSelectedOption(currentValue);
+  }, [currentValue]);
 
   return (
     <Box
