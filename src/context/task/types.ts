@@ -14,10 +14,10 @@ export type ActionMap<M extends { [index: string]: any }> = {
       };
 };
 
-interface TaskHistory {
+export interface TaskHistory {
   id: string;
   task: Task;
-  updatedAt: string | number;
+  updatedAt: number;
 }
 
 export interface Task {
@@ -25,15 +25,16 @@ export interface Task {
   title: string;
   description: string;
   status: string;
-  createdAt?: string | number;
-  history?: TaskHistory[] | [];
+  createdAt?: number;
+  lastUpdated?: number;
+  history?: TaskHistory[] | any;
 }
 
 export interface TaskListProps {
   data: Task[];
-  singleData: Task | null;
-  editedData: Task | null;
-  createdData: Task | null;
+  singleData: Task | null | undefined;
+  editedData: Task | null | undefined;
+  createdData: Task | null | undefined;
   error: object | null | string;
   loading: boolean;
 }
@@ -89,6 +90,7 @@ export type TasksPayload = {
     loading: boolean;
   };
   [Types.EditTaskByIdSuccess]: {
+    id: string | undefined;
     data: Task;
   };
   [Types.EditTaskByIdFailed]: {

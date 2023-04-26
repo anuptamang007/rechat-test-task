@@ -7,11 +7,11 @@ import {
 
 import { IDispatch, Task, Types } from './types';
 
-export const readAllTask = async (dispatch: (arg: IDispatch) => void) => {
+export const readAllTask = (dispatch: (arg: IDispatch) => void) => {
   dispatch({ type: Types.GetAllTask });
 
   try {
-    const response = await getAllTaskApi();
+    const response = getAllTaskApi();
 
     dispatch({
       type: Types.GetAllTaskSuccess,
@@ -25,14 +25,14 @@ export const readAllTask = async (dispatch: (arg: IDispatch) => void) => {
   }
 };
 
-export const readTaskById = async (
+export const readTaskById = (
   dispatch: (arg: IDispatch) => void,
   id: string
 ) => {
   dispatch({ type: Types.GetTaskById });
 
   try {
-    const response = await getTaskByIdApi(id);
+    const response = getTaskByIdApi(id);
     dispatch({
       type: Types.GetTaskByIdSuccess,
       payload: response,
@@ -45,14 +45,11 @@ export const readTaskById = async (
   }
 };
 
-export const createTask = async (
-  dispatch: (arg: IDispatch) => void,
-  task: Task
-) => {
+export const createTask = (dispatch: (arg: IDispatch) => void, task: Task) => {
   dispatch({ type: Types.CreateTask });
 
   try {
-    const response = await createTaskApi(task);
+    const response = createTaskApi(task);
 
     dispatch({
       type: Types.CreateTaskSuccess,
@@ -66,14 +63,11 @@ export const createTask = async (
   }
 };
 
-export const editTask = async (
-  dispatch: (arg: IDispatch) => void,
-  task: Task
-) => {
+export const editTask = (dispatch: (arg: IDispatch) => void, task: Task) => {
   dispatch({ type: Types.EditTaskById });
 
   try {
-    const response = await editTaskByIdApi(task);
+    const response = editTaskByIdApi(task);
 
     dispatch({
       type: Types.EditTaskByIdSuccess,

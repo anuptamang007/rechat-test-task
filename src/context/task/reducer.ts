@@ -1,4 +1,4 @@
-import { TaskActions, TaskListProps, Types } from './types';
+import { Task, TaskActions, TaskListProps, Types } from './types';
 
 export default function taskReducer(state: TaskListProps, action: TaskActions) {
   switch (action.type) {
@@ -32,6 +32,7 @@ export default function taskReducer(state: TaskListProps, action: TaskActions) {
       return {
         ...state,
         loading: false,
+        data: [...state.data, action.payload],
         createdData: action.payload,
       };
     }
@@ -72,6 +73,12 @@ export default function taskReducer(state: TaskListProps, action: TaskActions) {
       return {
         ...state,
         loading: false,
+        data: state.data.map((item: Task) => {
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        }),
         editedData: action.payload,
       };
     }
